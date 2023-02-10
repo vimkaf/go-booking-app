@@ -50,6 +50,7 @@ func main() {
 
 		if totalTicketsRemaining == 0 {
 			fmt.Print("Tickets sold out, till next year")
+			break
 		}
 
 	}
