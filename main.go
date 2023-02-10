@@ -8,7 +8,7 @@ import (
 func main() {
 	conferenceName := "PHPLagos"
 	const totalTicketsAvailable uint = 100
-	var totalTicketsRemaining = 100
+	var totalTicketsRemaining uint = 100
 
 	fmt.Println("Welcome to", conferenceName, "You are highly invited")
 	fmt.Printf("There are %v tickets reamining out of %v available tickets \n", totalTicketsRemaining, totalTicketsAvailable)
@@ -17,7 +17,7 @@ func main() {
 
 	for {
 		var firstName, lastName, email string
-		var userTicketPurchaseCount int = 0
+		var userTicketPurchaseCount uint = 0
 
 		fmt.Println("Enter your first name: ")
 		fmt.Scan(&firstName)
@@ -32,6 +32,11 @@ func main() {
 		fmt.Scan(&userTicketPurchaseCount)
 
 		totalTicketsRemaining -= userTicketPurchaseCount
+
+		if userTicketPurchaseCount > totalTicketsRemaining {
+			fmt.Println("Your purchase exceeds the availabe tickets")
+			break
+		}
 
 		bookings = append(bookings, firstName+" "+lastName)
 
