@@ -33,29 +33,37 @@ func main() {
 
 		totalTicketsRemaining -= userTicketPurchaseCount
 
-		if userTicketPurchaseCount > totalTicketsRemaining {
-			fmt.Println("Your purchase exceeds the availabe tickets")
-			break
-		}
+		nameIsValid := len(firstName) >= 2 && len(lastName) >= 2
+		emailIsValid := strings.Contains(email, "@")
+		ticketPurchaseIsValid := userTicketPurchaseCount > totalTicketsRemaining
 
-		bookings = append(bookings, firstName+" "+lastName)
+		if nameIsValid && emailIsValid && ticketPurchaseIsValid {
+			if userTicketPurchaseCount > totalTicketsRemaining {
+				fmt.Println("Your purchase exceeds the availabe tickets")
+				break
+			}
 
-		fmt.Printf("Congrats!! %v %v, You have purchased %v tickets for %v. You will receive a confirmation at %v \n", firstName, lastName, userTicketPurchaseCount, conferenceName, email)
-		fmt.Printf("There are %v tickets left \n", totalTicketsRemaining)
+			bookings = append(bookings, firstName+" "+lastName)
 
-		firstNames := []string{}
-		for _, booking := range bookings {
-			var names = strings.Fields(booking)
+			fmt.Printf("Congrats!! %v %v, You have purchased %v tickets for %v. You will receive a confirmation at %v \n", firstName, lastName, userTicketPurchaseCount, conferenceName, email)
+			fmt.Printf("There are %v tickets left \n", totalTicketsRemaining)
 
-			firstNames = append(firstNames, names[0])
+			firstNames := []string{}
+			for _, booking := range bookings {
+				var names = strings.Fields(booking)
 
-		}
+				firstNames = append(firstNames, names[0])
 
-		fmt.Printf("Bookings: %v \n", firstNames)
+			}
 
-		if totalTicketsRemaining == 0 {
-			fmt.Print("Tickets sold out, till next year")
-			break
+			fmt.Printf("Bookings: %v \n", firstNames)
+
+			if totalTicketsRemaining == 0 {
+				fmt.Print("Tickets sold out, till next year")
+				break
+			}
+		} else {
+			fmt.Println("Invalid inputs")
 		}
 
 	}
